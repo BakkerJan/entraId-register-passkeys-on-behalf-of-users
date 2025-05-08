@@ -94,7 +94,7 @@ def get_access_token_for_microsoft_graph():
     return access_token.group(1)
 
 
-def get_group_id_for_users_in_scope_for_registration(access_token):
+""" def get_group_id_for_users_in_scope_for_registration(access_token):
     print("-----")
     print("in get_group_id_for_users_in_scope_for_registration\n")
 
@@ -114,7 +114,7 @@ def get_group_id_for_users_in_scope_for_registration(access_token):
     else:
         print(response.status_code)
         print(response.content)
-        return None
+        return None """
 
 
 def get_users_in_scope_for_registration(group_id, access_token):
@@ -124,7 +124,7 @@ def get_users_in_scope_for_registration(group_id, access_token):
     headers = set_http_headers(access_token)
     params = {"$select": "id,userPrincipalName"}
     group_members_endpoint = (
-        "https://graph.microsoft.com/beta/groups/" + group_id + "/members"
+        "https://graph.microsoft.com/beta/groups/" + configs["usersInScopeGroup"] + "/members"
     )
     print(f"\tCalling: GET {group_members_endpoint}")
     response = requests.get(
@@ -243,10 +243,11 @@ def format_csv_header_row():
     ]
     return header
 
+#replaced get_group_id_for_users_in_scope_for_registration(access_token) with configs["usersInScopeGroup"] so I can user the GUID instead of Group Name
 
 def main():
     access_token = get_access_token_for_microsoft_graph()
-    group_id = get_group_id_for_users_in_scope_for_registration(access_token)
+    group_id = configs["usersInScopeGroup"] 
     users = get_users_in_scope_for_registration(group_id, access_token)
 
     with open(csv_file_name, "w", newline="") as out:
