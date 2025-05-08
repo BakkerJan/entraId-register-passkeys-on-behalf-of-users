@@ -2,7 +2,7 @@
     "tenantName": "{tenantName}.onmicrosoft.com",
     "client_id": "",
     "client_secret": "",
-    "usersInScopeGroup": "GroupName",
+    "usersInScopeGroup": "GroupObjectID",
     "challengeTimeoutInMinutes": 60,
     "deleteExistingUserFIDOCredentials": false,        
     "useRandomPIN": false,
